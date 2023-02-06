@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import NewExpense from './components/NewExpense/NewExpense';
 import Expenses from './components/Expenses/Expenses';
 
-const App = () => {
-  const expenses = [
+
+  const DUMMY_EXPENSES = [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -26,9 +26,17 @@ const App = () => {
     },
   ];
 
-  const addExpenseHandler = expense => {
+  const App = () => {
+    const [expenses, setExpenses ] =useState(DUMMY_EXPENSES)
 
+    const addExpenseHandler = expense => {
+      setExpenses((prevExpenses) => {
+        return [expense, ...prevExpenses]
+      })
   }
+
+  
+  
 
   // return React.createElement(
   //   'div',
@@ -39,7 +47,7 @@ const App = () => {
 
   return (
     <div>
-      <NewExpense  onAddExpense={addExpenseHandler}/>
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
     </div>
   );
